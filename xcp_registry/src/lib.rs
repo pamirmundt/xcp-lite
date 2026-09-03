@@ -29,26 +29,22 @@ mod a2l;
 mod mc_event;
 pub use mc_event::McEvent;
 pub use mc_event::McEventList;
-pub use mc_event::McEventListIterator;
 
 // McCalibrationSegment
 mod mc_calseg;
 pub use mc_calseg::McCalibrationSegment;
 pub use mc_calseg::McCalibrationSegmentList;
-pub use mc_calseg::McCalibrationSegmentListIterator;
 
 // McInstance
 mod mc_instance;
 pub use mc_instance::McInstance;
 pub use mc_instance::McInstanceList;
-pub use mc_instance::McInstanceListIterator;
 
 // McTypeDef
 mod mc_typedef;
 pub use mc_typedef::McTypeDef;
 pub use mc_typedef::McTypeDefField;
 pub use mc_typedef::McTypeDefList;
-pub use mc_typedef::McTypeDefListIterator;
 
 // McObjectType, McSupportData
 mod mc_support;
@@ -137,6 +133,23 @@ impl Default for McXcpTransportLayer {
             port: Some(5555),
             baud_rate: None,
         }
+    }
+}
+
+//-------------------------------------------------------------------------------------------------
+// McXcpProtocolLayer
+// XCP Protocol layer parameters
+// For A2l XCP IF_DATA
+
+#[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+pub struct McXcpProtocolLayer {
+    pub max_cto: u8,
+    pub max_dto: u16,
+}
+
+impl Default for McXcpProtocolLayer {
+    fn default() -> Self {
+        McXcpProtocolLayer { max_cto: 8, max_dto: 8 }
     }
 }
 
